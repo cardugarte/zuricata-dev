@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { links } from '@data/links';
+import { Github, Plane, Mail } from 'lucide-astro';
+
+const lucideIcons = { github: Github, plane: Plane, mail: Mail } as const;
 ---
 
 <BaseLayout title="Contact" description="Direct lines only. No forms, no tracking.">
@@ -14,17 +17,33 @@ import { links } from '@data/links';
       </p>
 
       <div class="grid gap-4 sm:grid-cols-2">
-        {links.map((link) => (
-          <a
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="card no-underline"
-          >
-            <h3 class="font-mono text-lg text-text-primary">{link.label}</h3>
-            <p class="mt-1 text-sm text-text-secondary">{link.description}</p>
-          </a>
-        ))}
+        {links.map((link) => {
+          const LucideIcon = lucideIcons[link.icon as keyof typeof lucideIcons];
+          return (
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="card no-underline"
+            >
+              <div class="flex items-center gap-2">
+                {link.icon === 'x' && (
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                )}
+                {link.icon === 'nostr' && (
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                    <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.836 14.264c-.384.426-.901.672-1.477.736-.16.016-.32.024-.48.024-.544 0-1.072-.144-1.536-.416a5.07 5.07 0 0 1-.696-.48c-.384-.304-.768-.608-1.2-.832-.368-.192-.752-.288-1.152-.288-.064 0-.128.008-.192.016a1.75 1.75 0 0 0-1.072.544c-.288.304-.448.704-.448 1.12 0 .064.008.128.016.192.08.608.416 1.136.928 1.456.352.224.752.336 1.168.336.096 0 .192-.008.288-.024.464-.064.88-.288 1.184-.632l.736.656c-.48.528-1.12.864-1.824.96-.144.016-.288.024-.432.024-.608 0-1.2-.16-1.712-.48-.768-.48-1.28-1.264-1.392-2.176a2.69 2.69 0 0 1-.016-.288c0-.624.24-1.216.672-1.664.464-.496 1.104-.8 1.792-.864.096-.008.192-.016.288-.016.576 0 1.136.144 1.648.416.336.176.648.4.944.624.352.272.704.544 1.104.752.288.144.592.224.912.224.048 0 .096 0 .144-.008.4-.048.768-.224 1.04-.512.256-.272.4-.624.4-.992 0-.048 0-.096-.008-.144-.064-.528-.352-.992-.8-1.28a1.98 1.98 0 0 0-1.024-.288c-.08 0-.16.008-.24.016-.384.048-.736.24-.992.528l-.736-.656c.416-.464.976-.768 1.6-.848.128-.016.256-.024.384-.024.528 0 1.04.144 1.504.416.672.432 1.104 1.12 1.2 1.904.016.08.016.16.016.24 0 .56-.208 1.088-.592 1.504z" />
+                  </svg>
+                )}
+                {LucideIcon && <LucideIcon size={20} />}
+                <h3 class="font-mono text-lg text-text-primary">{link.label}</h3>
+              </div>
+              <p class="mt-1 text-sm text-text-secondary">{link.description}</p>
+            </a>
+          );
+        })}
       </div>
     </div>
   </section>

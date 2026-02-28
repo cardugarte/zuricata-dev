@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Menu, X } from 'lucide-react';
 
 const navLinks = [
   { href: '/', label: '~/home' },
@@ -18,7 +19,7 @@ export default function MobileNav() {
         aria-label={open ? 'Close menu' : 'Open menu'}
         aria-expanded={open}
       >
-        {open ? '[close]' : '[menu]'}
+        {open ? <X size={24} /> : <Menu size={24} />}
       </button>
 
       {open && (

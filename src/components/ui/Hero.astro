@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import zuricataImg from '@/assets/zuricata.png';
 import TerminalBlink from '@components/islands/TerminalBlink';
+import { FileText, FolderOpen, Check } from 'lucide-astro';
 ---
 
 <section class="py-12 md:py-16">
@@ -14,13 +15,17 @@ import TerminalBlink from '@components/islands/TerminalBlink';
         <TerminalBlink client:load />
       </h1>
 
-      <p class="font-mono text-sm text-text-ghost tracking-widest uppercase mb-8">
-        privacy · security · AI
+      <p class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-sm text-text-ghost tracking-widest uppercase mb-8">
+        <span class="inline-flex items-center gap-1"><Check size={14} class="text-accent" />AI-first</span>
+        <span>·</span>
+        <span class="inline-flex items-center gap-1"><Check size={14} class="text-accent" />open protocols</span>
+        <span>·</span>
+        <span class="inline-flex items-center gap-1"><Check size={14} class="text-accent" />real products</span>
       </p>
 
       <p class="max-w-xl text-lg text-text-secondary leading-relaxed mb-10">
-        Building software that respects users. Frontend architecture, clean code,
-        and the belief that privacy is not optional.
+        I build products with AI at the core — from tourism platforms on Lightning
+        to legal AI agents. I automate everything else. If it can be built, I ship it.
       </p>
 
       <div class="flex flex-wrap gap-4">
@@ -28,12 +33,14 @@ import TerminalBlink from '@components/islands/TerminalBlink';
           href="/blog"
           class="inline-flex items-center gap-2 rounded-[--radius-card] bg-magenta-dim px-5 py-2.5 font-mono text-sm font-semibold text-text-primary no-underline transition-opacity hover:opacity-90"
         >
+          <FileText size={16} />
           ~/blog
         </a>
         <a
           href="/projects"
           class="inline-flex items-center gap-2 rounded-[--radius-card] border border-border px-5 py-2.5 font-mono text-sm text-text-secondary no-underline transition-colors hover:border-accent hover:text-accent"
         >
+          <FolderOpen size={16} />
           ~/projects
         </a>
       </div>

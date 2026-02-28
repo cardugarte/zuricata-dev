@@ -1,5 +1,6 @@
 ---
 import TagList from './TagList.astro';
+import { ExternalLink, Github } from 'lucide-astro';
 
 interface Props {
   title: string;
@@ -28,9 +29,9 @@ const { title, description, url, repo, tags } = Astro.props;
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        class="text-accent no-underline hover:text-text-primary"
+        class="inline-flex items-center gap-1 text-accent no-underline hover:text-text-primary"
       >
-        live →
+        live <ExternalLink size={16} />
       </a>
     )}
     {repo && (
@@ -38,9 +39,9 @@ const { title, description, url, repo, tags } = Astro.props;
         href={repo}
         target="_blank"
         rel="noopener noreferrer"
-        class="text-text-ghost no-underline hover:text-text-primary"
+        class="inline-flex items-center gap-1 text-text-ghost no-underline hover:text-text-primary"
       >
-        src →
+        src <Github size={16} />
       </a>
     )}
   </div>

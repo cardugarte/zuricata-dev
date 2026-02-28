@@ -1,18 +1,24 @@
 ---
+import { Rss, Github } from 'lucide-astro';
+
 const year = new Date().getFullYear();
 ---
 
 <footer class="border-t border-border py-10">
   <div class="section-container flex flex-col items-center gap-4 text-center">
     <div class="flex items-center gap-4 font-mono text-sm text-text-ghost">
-      <a href="/rss.xml" class="nav-link no-underline">rss</a>
+      <a href="/rss.xml" class="nav-link inline-flex items-center gap-1.5 no-underline">
+        <Rss size={16} />
+        rss
+      </a>
       <span class="text-border">|</span>
       <a
         href="https://github.com/zuricata"
         target="_blank"
         rel="noopener noreferrer"
-        class="nav-link no-underline"
+        class="nav-link inline-flex items-center gap-1.5 no-underline"
       >
+        <Github size={16} />
         github
       </a>
     </div>
