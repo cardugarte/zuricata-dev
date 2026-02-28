@@ -1,0 +1,27 @@
+---
+import FormattedDate from './FormattedDate.astro';
+import TagList from './TagList.astro';
+
+interface Props {
+  id: string;
+  title: string;
+  description: string;
+  pubDate: Date;
+  tags: string[];
+}
+
+const { id, title, description, pubDate, tags } = Astro.props;
+---
+
+<a href={`/blog/${id}`} class="card block no-underline">
+  <article>
+    <FormattedDate date={pubDate} />
+    <h3 class="mt-2 text-lg text-text-primary">{title}</h3>
+    <p class="mt-2 text-sm text-text-secondary line-clamp-2">{description}</p>
+    {tags.length > 0 && (
+      <div class="mt-3">
+        <TagList tags={tags} />
+      </div>
+    )}
+  </article>
+</a>

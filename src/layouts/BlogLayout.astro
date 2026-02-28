@@ -1,0 +1,43 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import FormattedDate from '@components/ui/FormattedDate.astro';
+import TagList from '@components/ui/TagList.astro';
+import { getReadingTime } from '@lib/readingTime';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  tags: string[];
+  rawContent: string;
+}
+
+const { title, description, pubDate, tags, rawContent } = Astro.props;
+const readingTime = getReadingTime(rawContent);
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="py-16">
+    <div class="section-container">
+      <header class="mb-12">
+        <div class="flex items-center gap-3 text-sm text-text-ghost">
+          <FormattedDate date={pubDate} />
+          <span class="text-border">·</span>
+          <span class="font-mono">{readingTime}</span>
+        </div>
+
+        <h1 class="mt-4 text-3xl md:text-4xl">{title}</h1>
+
+        {tags.length > 0 && (
+          <div class="mt-4">
+            <TagList tags={tags} />
+          </div>
+        )}
+      </header>
+
+      <div class="prose-content">
+        <slot />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,79 @@
+---
+const icons: Record<string, string> = {
+  claude: `<svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M4.709 15.955l4.397-2.85-.93-1.69L3.1 14.63c-.506.293-.862.636-1.064 1.078-.201.437-.227.895-.08 1.374.148.48.398.818.725 1.006.33.19.73.21 1.19.051.395-.137.641-.273.838-.184zm8.921-8.145L16.526.697a1.09 1.09 0 0 0-.138-.68C16.2-.203 15.895-.32 15.46-.26c-.44.063-.752.24-.94.544l-3.61 6.162 2.72 1.364zM13.11 9.903l-2.593-1.3-5.19 8.857c-.138.245-.172.496-.093.744.073.254.228.43.459.527.237.103.476.1.71-.003a.992.992 0 0 0 .476-.44L13.11 9.903zM23.86 12.072c-.175-.479-.497-.776-.955-.88l-6.06-1.39.36 1.892 5.423.715c.581.077.989-.012 1.218-.28.233-.273.24-.605.014-1.057zm-7.628.013l-.345-1.81-5.513 9.406c-.128.228-.147.472-.046.724.094.244.27.41.515.485.251.08.489.053.704-.073a.952.952 0 0 0 .41-.481l4.275-8.251zm.148 3.82l1.972 6.533c.115.347.32.581.632.702.308.12.611.1.918-.043.3-.147.481-.38.535-.706.056-.322.007-.663-.168-1.016l-2.956-5.98-.933.51zM12.002 11.728a1.07 1.07 0 0 0 .534-.144 1.07 1.07 0 0 0 .393-.393 1.07 1.07 0 0 0 .144-.534 1.07 1.07 0 0 0-.144-.535 1.07 1.07 0 0 0-.393-.392 1.07 1.07 0 0 0-.534-.145 1.07 1.07 0 0 0-.535.145 1.07 1.07 0 0 0-.392.392 1.07 1.07 0 0 0-.145.535c0 .194.048.374.145.534a1.07 1.07 0 0 0 .392.393c.16.096.34.144.535.144z"/></svg>`,
+  'claude-code': `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 4l-4 16" stroke-linecap="round"/></svg>`,
+  opencode: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><rect x="3" y="3" width="18" height="18" rx="3" /><path d="M8 10l-2 2 2 2M16 10l2 2-2 2M13 8l-2 8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  openclaw: `<svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M12 2C6.48 2 2 5.82 2 10.5c0 2.34 1.12 4.44 2.92 5.96-.16 1.2-.78 2.28-1.72 3.04a.5.5 0 0 0 .32.88c1.98 0 3.72-.84 4.92-2.12.52.08 1.04.12 1.56.12h.34c-.22-.64-.34-1.32-.34-2.02 0-3.76 3.24-6.82 7.24-6.98C16.28 5.36 12 2 12 2zm-3.5 10a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>`,
+  cloud: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M6.5 19a4.5 4.5 0 0 1-.42-8.98 7 7 0 0 1 13.84 0A4.5 4.5 0 0 1 17.5 19H6.5z" stroke-linejoin="round"/></svg>`,
+  linux: `<svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M12.503 2c-1.927 0-3.1 1.896-3.1 4.293 0 1.172.309 2.455.831 3.564-.652.386-1.42.958-1.888 1.715-.586.946-.726 2.053-.218 3.39-.954.476-1.68 1.08-2.103 1.836-.508.903-.578 1.93.093 3.057.486.816 1.324 1.145 2.31 1.145 1.05 0 2.296-.367 3.608-.717 1.218-.326 2.49-.665 3.67-.665.784 0 1.644.122 2.437.389.791.265 1.512.67 2.015 1.257l.787-.614c-.625-.73-1.47-1.193-2.367-1.493a9.22 9.22 0 0 0-1.46-.346c.39-.285.74-.637 1.033-1.04.595-.821.975-1.84 1.019-2.964.372-.157.727-.388 1.02-.694.595-.62.927-1.493.617-2.6-.29-1.03-.483-1.656-.906-2.163-.221-.265-.503-.484-.867-.635a2.05 2.05 0 0 0-.457-.138c.007-.087.012-.175.012-.264 0-1.064-.303-2.06-.833-2.81C15.277 2.54 14.536 2 13.6 2h-1.097zm0 1h1.097c.556 0 1.053.327 1.476.9.424.573.693 1.4.693 2.314 0 .318-.04.63-.113.924a4.678 4.678 0 0 0-1.253-.187c-.786-.012-1.494.228-2.052.545-.557.316-.996.728-1.26 1.128l-.86-.142c.094-.502.163-.997.163-1.482 0-2.175 1.005-4 2.109-4z"/></svg>`,
+  supabase: `<svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M13.7 21.8c-.4.5-1.3.2-1.3-.5V14h8.3c.9 0 1.4 1 .8 1.7L13.7 21.8zM10.3 2.2c.4-.5 1.3-.2 1.3.5V10H3.3c-.9 0-1.4-1-.8-1.7L10.3 2.2z" opacity=".9"/></svg>`,
+  nextjs: `<svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.5 14.5v-9l7 12.36A8.5 8.5 0 0 1 10.5 16.5zm5-2.5V8h1.5v7.66l-1.5-1.66z"/></svg>`,
+};
+
+const tools = Object.entries(icons).map(([key, svg]) => {
+  const names: Record<string, string> = {
+    claude: 'Claude',
+    'claude-code': 'Claude Code',
+    opencode: 'OpenCode',
+    openclaw: 'OpenClaw',
+    cloud: 'Cloud',
+    linux: 'Linux',
+    supabase: 'Supabase',
+    nextjs: 'Next.js',
+  };
+  return { name: names[key], icon: svg };
+});
+---
+
+<section class="marquee border-y border-border py-8">
+  {[0, 1].map((i) => (
+    <div class="marquee-group" aria-hidden={i === 1 ? 'true' : undefined}>
+      {tools.map(({ name, icon }) => (
+        <div class="marquee-item group" title={name}>
+          <div class="flex h-10 w-10 items-center justify-center text-text-ghost transition-colors duration-300 group-hover:text-accent">
+            <Fragment set:html={icon} />
+          </div>
+          <span class="mt-1.5 font-mono text-[10px] text-text-ghost transition-colors duration-300 group-hover:text-accent">
+            {name}
+          </span>
+        </div>
+      ))}
+    </div>
+  ))}
+</section>
+
+<style>
+  .marquee {
+    --gap: 3rem;
+    display: flex;
+    gap: var(--gap);
+    overflow: hidden;
+  }
+
+  .marquee-group {
+    display: flex;
+    gap: var(--gap);
+    flex-shrink: 0;
+    min-width: 100%;
+    justify-content: space-around;
+    animation: scroll 25s linear infinite;
+  }
+
+  .marquee-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    cursor: default;
+  }
+
+  .marquee:hover .marquee-group {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll {
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+</style>

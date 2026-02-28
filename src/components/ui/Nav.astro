@@ -1,0 +1,49 @@
+---
+import MobileNav from '@components/islands/MobileNav';
+
+const navLinks = [
+  { href: '/', label: '~/home' },
+  { href: '/blog', label: '~/blog' },
+  { href: '/projects', label: '~/projects' },
+  { href: '/contact', label: '~/contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav
+  class="sticky top-0 z-50 border-b border-border bg-surface-base/80 backdrop-blur-md"
+>
+  <div class="section-container flex h-14 items-center justify-between">
+    <a href="/" class="font-mono text-lg font-bold text-text-primary no-underline">
+      zuricata<span class="text-magenta-dim">.dev</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <ul class="hidden items-center gap-6 md:flex">
+      {
+        navLinks.map(({ href, label }) => (
+          <li>
+            <a
+              href={href}
+              class:list={[
+                'nav-link no-underline',
+                currentPath === href ||
+                (href !== '/' && currentPath.startsWith(href))
+                  ? 'text-magenta-dim'
+                  : '',
+              ]}
+            >
+              {label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- Mobile nav -->
+    <div class="md:hidden">
+      <MobileNav client:load />
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,236 @@
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/jetbrains-mono';
+@import 'tailwindcss';
+
+@theme {
+  /* ── Surfaces ── */
+  --color-surface-base: #020804;
+  --color-surface-raised: #060f08;
+  --color-surface-overlay: #0a1a0e;
+  --color-surface-2: #0e2414;
+  --color-muted: #1a3a20;
+
+  /* ── Text ── */
+  --color-text-primary: #c8ffd8;
+  --color-text-secondary: #6aab7a;
+  --color-text-ghost: #3d6645;
+
+  /* ── Neon Green — Primary ── */
+  --color-accent: #00e554;
+  --color-accent-bright: #00ff61;
+  --color-accent-dim: #00a83d;
+  --color-accent-deep: #004d1f;
+  --color-accent-glow: #00ff6122;
+
+  /* ── Neon Magenta — Secondary ── */
+  --color-magenta: #d400ff;
+  --color-magenta-bright: #e840ff;
+  --color-magenta-dim: #9900bb;
+  --color-magenta-deep: #3d0050;
+  --color-magenta-glow: #d400ff22;
+
+  /* ── Neon Cyan — Tertiary ── */
+  --color-cyan: #00d4c8;
+  --color-cyan-bright: #00fff5;
+  --color-cyan-dim: #008a85;
+
+  /* ── Tags (magenta) ── */
+  --color-tag: #e840ff;
+  --color-tag-bg: #d400ff22;
+
+  /* ── Border ── */
+  --color-border: #1f4a26;
+  --color-border-hover: #2a6030;
+
+  /* ── Fonts ── */
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+
+  /* ── Radius ── */
+  --radius-card: 0.75rem;
+  --radius-tag: 0.375rem;
+
+  /* ── Shadows ── */
+  --shadow-neon-green: 0 0 20px #00ff6133, 0 0 60px #00ff6111;
+  --shadow-neon-magenta: 0 0 20px #d400ff33, 0 0 60px #d400ff11;
+  --shadow-neon-cyan: 0 0 20px #00d4c833, 0 0 60px #00d4c811;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-surface-base text-text-primary font-sans antialiased;
+    @apply leading-relaxed;
+    background-image:
+      linear-gradient(#1f4a2618 1px, transparent 1px),
+      linear-gradient(90deg, #1f4a2618 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-surface-base);
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent rounded-sm;
+  }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-surface-base);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-border-hover);
+  }
+
+  /* ── Headings ── */
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-mono font-bold tracking-tight text-text-primary;
+  }
+
+  /* ── Links ── */
+  a {
+    @apply text-accent transition-colors duration-200;
+  }
+
+  a:hover {
+    @apply text-accent-dim;
+  }
+
+  /* ── Code ── */
+  code {
+    @apply font-mono text-[0.9em] bg-surface-raised px-1.5 py-0.5 rounded;
+  }
+
+  pre {
+    @apply rounded-[--radius-card] border border-border p-4 overflow-x-auto;
+  }
+
+  pre code {
+    @apply bg-transparent p-0;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-surface-raised border border-border rounded-[--radius-card] p-6;
+    @apply transition-all duration-300;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-accent), transparent);
+  }
+
+  .card:hover {
+    @apply border-border-hover;
+    box-shadow: var(--shadow-neon-green);
+  }
+
+  .nav-link {
+    @apply font-mono text-sm text-text-secondary transition-colors duration-200;
+  }
+
+  .nav-link:hover {
+    @apply text-accent;
+  }
+
+  .section-container {
+    @apply mx-auto max-w-3xl px-6;
+  }
+
+  .section-heading {
+    @apply font-mono text-text-ghost text-sm tracking-widest uppercase mb-8;
+  }
+
+  .terminal-prompt {
+    @apply font-mono text-accent;
+  }
+
+  .prose-content {
+    @apply leading-relaxed text-text-primary;
+  }
+
+  .prose-content h2 {
+    @apply text-2xl mt-12 mb-4;
+  }
+
+  .prose-content h3 {
+    @apply text-xl mt-8 mb-3;
+  }
+
+  .prose-content p {
+    @apply mb-6 text-text-secondary;
+  }
+
+  .prose-content ul,
+  .prose-content ol {
+    @apply mb-6 pl-6 text-text-secondary;
+  }
+
+  .prose-content ul {
+    @apply list-disc;
+  }
+
+  .prose-content ol {
+    @apply list-decimal;
+  }
+
+  .prose-content li {
+    @apply mb-2;
+  }
+
+  .prose-content blockquote {
+    @apply border-l-2 border-accent pl-4 italic text-text-ghost my-6;
+  }
+
+  .prose-content a {
+    @apply text-accent underline underline-offset-4 decoration-accent/40;
+  }
+
+  .prose-content a:hover {
+    @apply decoration-accent;
+  }
+
+  .prose-content pre {
+    @apply my-6;
+  }
+
+  .prose-content hr {
+    @apply border-border my-10;
+  }
+
+  .prose-content img {
+    @apply rounded-[--radius-card] my-6;
+  }
+
+  .prose-content strong {
+    @apply font-semibold text-text-primary;
+  }
+}

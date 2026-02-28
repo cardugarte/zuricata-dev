@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+import zuricataImg from '@/assets/zuricata.png';
+import TerminalBlink from '@components/islands/TerminalBlink';
+---
+
+<section class="py-12 md:py-16">
+  <div class="mx-auto max-w-5xl px-6 flex flex-col-reverse items-center gap-12 md:flex-row md:justify-between">
+    <div class="flex-1">
+      <p class="terminal-prompt mb-4 text-sm">$ whoami</p>
+
+      <h1 class="text-4xl md:text-5xl lg:text-6xl leading-tight mb-6">
+        zuricata<span class="text-magenta-dim">.dev</span>
+        <TerminalBlink client:load />
+      </h1>
+
+      <p class="font-mono text-sm text-text-ghost tracking-widest uppercase mb-8">
+        privacy · security · AI
+      </p>
+
+      <p class="max-w-xl text-lg text-text-secondary leading-relaxed mb-10">
+        Building software that respects users. Frontend architecture, clean code,
+        and the belief that privacy is not optional.
+      </p>
+
+      <div class="flex flex-wrap gap-4">
+        <a
+          href="/blog"
+          class="inline-flex items-center gap-2 rounded-[--radius-card] bg-magenta-dim px-5 py-2.5 font-mono text-sm font-semibold text-text-primary no-underline transition-opacity hover:opacity-90"
+        >
+          ~/blog
+        </a>
+        <a
+          href="/projects"
+          class="inline-flex items-center gap-2 rounded-[--radius-card] border border-border px-5 py-2.5 font-mono text-sm text-text-secondary no-underline transition-colors hover:border-accent hover:text-accent"
+        >
+          ~/projects
+        </a>
+      </div>
+    </div>
+
+    <div class="flex-shrink-0">
+      <Image
+        src={zuricataImg}
+        alt="zuricata"
+        width={400}
+        height={400}
+        class="rounded-full border-2 border-border"
+      />
+    </div>
+  </div>
+</section>

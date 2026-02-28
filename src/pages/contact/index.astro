@@ -1,0 +1,31 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { links } from '@data/links';
+---
+
+<BaseLayout title="Contact" description="Direct lines only. No forms, no tracking.">
+  <section class="py-16">
+    <div class="section-container">
+      <p class="section-heading">// contact</p>
+      <h1 class="text-3xl md:text-4xl mb-4">Get in touch</h1>
+
+      <p class="max-w-xl text-text-secondary mb-10">
+        Prefer async, prefer encrypted. No forms — direct lines only.
+      </p>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        {links.map((link) => (
+          <a
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="card no-underline"
+          >
+            <h3 class="font-mono text-lg text-text-primary">{link.label}</h3>
+            <p class="mt-1 text-sm text-text-secondary">{link.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

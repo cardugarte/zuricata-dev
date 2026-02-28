@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zuricata.dev/sitemap-index.xml
