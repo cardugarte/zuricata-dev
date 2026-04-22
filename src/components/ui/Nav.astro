@@ -12,32 +12,32 @@ const currentPath = Astro.url.pathname;
 ---
 
 <nav
-  class="sticky top-0 z-50 border-b border-border bg-surface-base/80 backdrop-blur-md"
+  class="sticky top-0 z-50 border-b border-border/60 bg-surface-base"
 >
-  <div class="section-container flex h-14 items-center justify-between">
-    <a href="/" class="font-mono text-lg font-bold text-text-primary no-underline">
-      zuricata<span class="text-magenta-dim">.dev</span>
+  <div class="section-container flex h-12 items-center justify-between">
+    <a href="/" class="font-mono text-base font-semibold text-accent no-underline">
+      zuricata<span class="text-text-ghost">.dev</span>
     </a>
 
     <!-- Desktop nav -->
-    <ul class="hidden items-center gap-6 md:flex">
+    <ul class="hidden items-center gap-5 md:flex">
       {
-        navLinks.map(({ href, label }) => (
-          <li>
-            <a
-              href={href}
-              class:list={[
-                'nav-link no-underline',
-                currentPath === href ||
-                (href !== '/' && currentPath.startsWith(href))
-                  ? 'text-magenta-dim'
-                  : '',
-              ]}
-            >
-              {label}
-            </a>
-          </li>
-        ))
+        navLinks.map(({ href, label }) => {
+          const isActive = currentPath === href || (href !== '/' && currentPath.startsWith(href));
+          return (
+            <li>
+              <a
+                href={href}
+                class:list={[
+                  'nav-link no-underline',
+                  isActive ? 'text-accent after:w-full' : '',
+                ]}
+              >
+                {label}
+              </a>
+            </li>
+          );
+        })
       }
     </ul>
 

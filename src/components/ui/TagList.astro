@@ -1,6 +1,4 @@
 ---
-import { Hash } from 'lucide-astro';
-
 interface Props {
   tags: string[];
 }
@@ -8,13 +6,6 @@ interface Props {
 const { tags } = Astro.props;
 ---
 
-<ul class="flex flex-wrap gap-2">
-  {
-    tags.map((tag) => (
-      <li class="inline-flex items-center gap-1 rounded-[--radius-tag] bg-tag-bg px-2 py-0.5 font-mono text-xs text-tag">
-        <Hash size={12} />
-        {tag}
-      </li>
-    ))
-  }
-</ul>
+<span class="font-mono text-xs text-text-ghost">
+  {tags.join(' · ')}
+</span>
