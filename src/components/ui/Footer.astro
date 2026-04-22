@@ -1,29 +1,20 @@
 ---
-import { Rss, Github } from 'lucide-astro';
-
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-border py-10">
-  <div class="section-container flex flex-col items-center gap-4 text-center">
-    <div class="flex items-center gap-4 font-mono text-sm text-text-ghost">
-      <a href="/rss.xml" class="nav-link inline-flex items-center gap-1.5 no-underline">
-        <Rss size={16} />
-        rss
-      </a>
-      <span class="text-border">|</span>
+<footer class="border-t border-border/40 py-6">
+  <div class="section-container flex flex-col items-center justify-between gap-3 text-xs font-mono text-text-ghost sm:flex-row">
+    <span>&copy; {year} zuricata.dev</span>
+    <div class="flex items-center gap-4">
+      <a href="/rss.xml" class="nav-link no-underline">rss</a>
       <a
-        href="https://github.com/zuricata"
+        href="https://github.com/cardugarte"
         target="_blank"
         rel="noopener noreferrer"
-        class="nav-link inline-flex items-center gap-1.5 no-underline"
+        class="nav-link no-underline"
       >
-        <Github size={16} />
         github
       </a>
     </div>
-    <p class="font-mono text-xs text-text-ghost">
-      &copy; {year} zuricata.dev — encrypted with care
-    </p>
   </div>
 </footer>

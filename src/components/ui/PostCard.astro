@@ -1,7 +1,6 @@
 ---
 import FormattedDate from './FormattedDate.astro';
 import TagList from './TagList.astro';
-import { Calendar } from 'lucide-astro';
 
 interface Props {
   id: string;
@@ -14,13 +13,12 @@ interface Props {
 const { id, title, description, pubDate, tags } = Astro.props;
 ---
 
-<a href={`/blog/${id}`} class="card block no-underline">
+<a href={`/blog/${id}`} class="card block no-underline group">
   <article>
-    <div class="flex items-center gap-1.5 text-text-ghost">
-      <Calendar size={14} />
+    <div class="font-mono text-xs text-text-ghost">
       <FormattedDate date={pubDate} />
     </div>
-    <h3 class="mt-2 text-lg text-text-primary">{title}</h3>
+    <h3 class="mt-2 text-lg text-text-primary group-hover:text-accent transition-colors duration-200">{title}</h3>
     <p class="mt-2 text-sm text-text-secondary line-clamp-2">{description}</p>
     {tags.length > 0 && (
       <div class="mt-3">

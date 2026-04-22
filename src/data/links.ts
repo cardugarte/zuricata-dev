@@ -32,7 +32,7 @@ export const links: Link[] = [
   },
   {
     label: 'Email',
-    url: 'mailto:hi@zuricata.dev',
+    url: 'mailto:carlos@zuricata.dev',
     description: 'For direct communication. PGP preferred.',
     icon: 'mail',
   },
