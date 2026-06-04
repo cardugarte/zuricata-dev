@@ -1,0 +1,11 @@
+[package]
+name = "rust-intro"
+version = "0.1.0"
+edition = "2021"
+
+# Sesión inicial para aprender programación con Rust.
+# Cada "lección" es una función que se ejecuta desde main().
+
+[[bin]]
+name = "rust-intro"
+path = "src/main.rs"
