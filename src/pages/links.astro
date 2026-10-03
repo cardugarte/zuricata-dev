@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import zuricataImg from '@/assets/zuricata.png';
 import { Globe, Mail, Instagram } from 'lucide-astro';
+import NostrIcon from '@components/icons/NostrIcon.astro';
 
 const lucideIcons = {
   globe: Globe,
@@ -103,13 +104,7 @@ const socialLinks: {
                       </svg>
                     )}
                     {link.icon === 'nostr' && (
-                      <img
-                        src="/icons/nostr.png"
-                        alt=""
-                        width="20"
-                        height="20"
-                        class="size-5 shrink-0 object-contain"
-                      />
+                      <NostrIcon size={20} class="shrink-0 text-accent" />
                     )}
                     {LucideIcon && (
                       <LucideIcon size={20} class="shrink-0 text-accent" />
