@@ -7,23 +7,27 @@ interface Props {
   url?: string;
   repo?: string;
   tags: string[];
+  inverted?: boolean;
 }
 
-const { title, description, url, repo, tags } = Astro.props;
+const { title, description, url, repo, tags, inverted = false } = Astro.props;
 ---
 
-<div class="card">
-  <h3 class="text-lg text-text-primary">{title}</h3>
-  <p class="mt-2 text-sm text-text-secondary">{description}</p>
+<div class:list={['card', inverted && 'card-inverted']}>
+  <h3 class="card-title text-xl leading-tight">{title}</h3>
+  <p class="card-body mt-3 text-sm">{description}</p>
 
-  <div class="mt-4 flex items-center justify-between">
-    <div class="flex gap-4 font-mono text-xs">
+  <div class="mt-5 flex items-end justify-between gap-4">
+    <div class="flex gap-4 font-mono text-xs uppercase tracking-[0.18em]">
       {url && (
         <a
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-accent no-underline transition-colors duration-200 hover:text-accent-bright"
+          class:list={[
+            'no-underline',
+            inverted ? 'text-surface-base' : 'text-text-primary',
+          ]}
         >
           live
         </a>
@@ -33,15 +37,16 @@ const { title, description, url, repo, tags } = Astro.props;
           href={repo}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-text-ghost no-underline transition-colors duration-200 hover:text-text-secondary"
+          class:list={[
+            'no-underline',
+            inverted ? 'text-text-faint' : 'text-text-label',
+          ]}
         >
           src
         </a>
       )}
     </div>
-    
-    {tags.length > 0 && (
-      <TagList tags={tags} />
-    )}
+
+    {tags.length > 0 && <TagList tags={tags} />}
   </div>
 </div>

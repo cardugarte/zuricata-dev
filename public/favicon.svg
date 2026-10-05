@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="4" fill="#020804"/>
-  <text x="50%" y="54%" dominant-baseline="central" text-anchor="middle"
-        font-family="monospace" font-size="18" font-weight="bold"
-        fill="#00e554">Z</text>
+  <rect width="32" height="32" fill="#000000"/>
+  <text x="50%" y="52%" dominant-baseline="central" text-anchor="middle"
+        font-family="ui-monospace, monospace" font-size="18" font-weight="700"
+        fill="#ffffff">Z</text>
+  <rect x="10" y="26" width="12" height="1.5" fill="#e6b45c"/>
 </svg>

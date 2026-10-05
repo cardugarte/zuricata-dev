@@ -33,15 +33,15 @@ const tools = Object.entries(icons).map(([key, svg]) => {
 });
 ---
 
-<section class="marquee border-y border-border py-8">
+<section class="marquee border-y border-border py-10">
   {[0, 1].map((i) => (
     <div class="marquee-group" aria-hidden={i === 1 ? 'true' : undefined}>
       {tools.map(({ name, icon }) => (
         <div class="marquee-item group" title={name}>
-          <div class="flex h-10 w-10 items-center justify-center text-text-ghost transition-colors duration-300 group-hover:text-accent">
+          <div class="flex h-10 w-10 items-center justify-center text-text-faint transition-colors duration-300 group-hover:text-text-primary">
             <Fragment set:html={icon} />
           </div>
-          <span class="mt-1.5 font-mono text-[10px] text-text-ghost transition-colors duration-300 group-hover:text-accent">
+          <span class="mt-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-text-faint transition-colors duration-300 group-hover:text-text-label">
             {name}
           </span>
         </div>

@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import PostCard from './PostCard.astro';
+import SectionHeader from './SectionHeader.astro';
 
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
@@ -9,28 +10,26 @@ const posts = (await getCollection('blog'))
 ---
 
 {posts.length > 0 && (
-  <section class="py-16">
+  <section class="py-20">
     <div class="section-container">
-      <p class="section-heading">// recent posts</p>
+      <SectionHeader kicker="writing" counter="03 / 04" />
 
       <div class="grid gap-4">
-        {posts.map((post) => (
+        {posts.map((post, index) => (
           <PostCard
             id={post.id}
             title={post.data.title}
             description={post.data.description}
             pubDate={post.data.pubDate}
             tags={post.data.tags}
+            inverted={index === 0}
           />
         ))}
       </div>
 
-      <div class="mt-8 text-center">
-        <a
-          href="/blog"
-          class="nav-link no-underline hover:text-accent"
-        >
-          all posts →
+      <div class="mt-10">
+        <a href="/blog" class="nav-link no-underline">
+          All posts
         </a>
       </div>
     </div>

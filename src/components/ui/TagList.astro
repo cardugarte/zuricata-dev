@@ -6,6 +6,10 @@ interface Props {
 const { tags } = Astro.props;
 ---
 
-<span class="font-mono text-xs text-text-ghost">
-  {tags.join(' · ')}
-</span>
+<ul class="flex flex-wrap gap-2">
+  {
+    tags.map((tag) => (
+      <li class="tag-pill">{tag}</li>
+    ))
+  }
+</ul>
