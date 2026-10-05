@@ -254,36 +254,6 @@
     border-color: var(--color-text-primary);
   }
 
-  .photo-bw {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .photo-bw img {
-    display: block;
-    filter: grayscale(1) contrast(1.12) brightness(0.94);
-  }
-
-  .photo-bw::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background:
-      linear-gradient(
-        180deg,
-        rgb(0 0 0 / 0.28) 0%,
-        rgb(0 0 0 / 0.08) 42%,
-        rgb(0 0 0 / 0.5) 100%
-      ),
-      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
-    background-size:
-      auto,
-      180px 180px;
-    mix-blend-mode: overlay;
-    opacity: 0.4;
-  }
-
   .prose-content {
     @apply font-sans text-text-body;
     line-height: 1.38;
