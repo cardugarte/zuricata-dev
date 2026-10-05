@@ -17,36 +17,38 @@ const { title, description, url, repo, tags, inverted = false } = Astro.props;
   <h3 class="card-title text-xl leading-tight">{title}</h3>
   <p class="card-body mt-3 text-sm">{description}</p>
 
-  <div class="mt-5 flex items-end justify-between gap-4">
-    <div class="flex gap-4 font-mono text-xs uppercase tracking-[0.18em]">
-      {url && (
-        <a
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer"
-          class:list={[
-            'no-underline',
-            inverted ? 'text-surface-base' : 'text-text-primary',
-          ]}
-        >
-          live
-        </a>
-      )}
-      {repo && (
-        <a
-          href={repo}
-          target="_blank"
-          rel="noopener noreferrer"
-          class:list={[
-            'no-underline',
-            inverted ? 'text-text-faint' : 'text-text-label',
-          ]}
-        >
-          src
-        </a>
-      )}
+  {tags.length > 0 && (
+    <div class="mt-5">
+      <TagList tags={tags} />
     </div>
+  )}
 
-    {tags.length > 0 && <TagList tags={tags} />}
+  <div class="mt-4 flex gap-4 font-mono text-xs uppercase tracking-[0.18em]">
+    {url && (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class:list={[
+          'no-underline',
+          inverted ? 'text-surface-base' : 'text-text-primary',
+        ]}
+      >
+        live
+      </a>
+    )}
+    {repo && (
+      <a
+        href={repo}
+        target="_blank"
+        rel="noopener noreferrer"
+        class:list={[
+          'no-underline',
+          inverted ? 'text-text-faint' : 'text-text-label',
+        ]}
+      >
+        src
+      </a>
+    )}
   </div>
 </div>
