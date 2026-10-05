@@ -1,33 +1,32 @@
 ---
 import { projects } from '@data/projects';
 import ProjectCard from './ProjectCard.astro';
+import SectionHeader from './SectionHeader.astro';
 
 const featured = projects.filter((p) => p.featured).slice(0, 3);
 ---
 
 {featured.length > 0 && (
-  <section class="py-16">
+  <section class="py-20">
     <div class="section-container">
-      <p class="section-heading">// featured projects</p>
+      <SectionHeader kicker="projects" counter="04 / 04" />
 
       <div class="grid gap-4 md:grid-cols-2">
-        {featured.map((project) => (
+        {featured.map((project, index) => (
           <ProjectCard
             title={project.title}
             description={project.description}
             url={project.url}
             repo={project.repo}
             tags={project.tags}
+            inverted={index === 0}
           />
         ))}
       </div>
 
-      <div class="mt-8 text-center">
-        <a
-          href="/projects"
-          class="nav-link no-underline hover:text-accent"
-        >
-          all projects →
+      <div class="mt-10">
+        <a href="/projects" class="nav-link no-underline">
+          All projects
         </a>
       </div>
     </div>

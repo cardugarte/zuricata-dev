@@ -1,29 +1,33 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import ProjectCard from '@components/ui/ProjectCard.astro';
+import SectionHeader from '@components/ui/SectionHeader.astro';
 import { projects } from '@data/projects';
 
 const active = projects.filter((p) => p.status === 'active');
 const archived = projects.filter((p) => p.status === 'archived');
+const total = String(projects.length).padStart(2, '0');
 ---
 
 <BaseLayout title="Projects" description="Things I've built and contributed to.">
-  <section class="py-16">
+  <section class="py-16 md:py-24">
     <div class="section-container">
-      <p class="section-heading">// projects</p>
-      <h1 class="text-3xl md:text-4xl mb-10">Projects</h1>
+      <SectionHeader kicker="projects" counter={`01 / ${total}`} />
+      <h1 class="mb-4 text-4xl leading-tight md:text-5xl">Projects</h1>
+      <div class="gold-rule mb-12"></div>
 
       {active.length > 0 && (
-        <div class="mb-12">
-          <h2 class="font-mono text-sm text-text-ghost mb-4">active</h2>
+        <div class="mb-14">
+          <h2 class="section-heading mb-5">active</h2>
           <div class="grid gap-4 md:grid-cols-2">
-            {active.map((project) => (
+            {active.map((project, index) => (
               <ProjectCard
                 title={project.title}
                 description={project.description}
                 url={project.url}
                 repo={project.repo}
                 tags={project.tags}
+                inverted={index === 0}
               />
             ))}
           </div>
@@ -32,7 +36,7 @@ const archived = projects.filter((p) => p.status === 'archived');
 
       {archived.length > 0 && (
         <div>
-          <h2 class="font-mono text-sm text-text-ghost mb-4">archived</h2>
+          <h2 class="section-heading mb-5">archived</h2>
           <div class="grid gap-4 md:grid-cols-2">
             {archived.map((project) => (
               <ProjectCard

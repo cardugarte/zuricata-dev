@@ -2,10 +2,14 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-border/40 py-6">
-  <div class="section-container flex flex-col items-center justify-between gap-3 text-xs font-mono text-text-ghost sm:flex-row">
-    <span>&copy; {year} zuricata.dev</span>
-    <div class="flex items-center gap-4">
+<footer class="border-t border-border py-8">
+  <div
+    class="section-container flex flex-col items-center justify-between gap-4 sm:flex-row"
+  >
+    <span class="font-mono text-xs text-text-label">
+      &copy; {year} zuricata.dev
+    </span>
+    <div class="flex items-center gap-5">
       <a href="/rss.xml" class="nav-link no-underline">rss</a>
       <a
         href="https://github.com/cardugarte"

@@ -1,0 +1,13 @@
+---
+interface Props {
+  kicker: string;
+  counter?: string;
+}
+
+const { kicker, counter } = Astro.props;
+---
+
+<div class="section-kicker">
+  <p class="section-heading">{kicker}</p>
+  {counter && <p class="section-counter">{counter}</p>}
+</div>

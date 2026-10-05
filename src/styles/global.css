@@ -1,33 +1,49 @@
-@import '@fontsource-variable/inter';
-@import '@fontsource-variable/jetbrains-mono';
+@import '@fontsource/iosevka-charon-mono/latin-400.css';
+@import '@fontsource/iosevka-charon-mono/latin-500.css';
+@import '@fontsource/iosevka-charon-mono/latin-700.css';
+@import '@fontsource/iosevka-charon-mono/latin-400-italic.css';
+@import '@fontsource/iosevka-charon-mono/latin-ext-400.css';
+@import '@fontsource/iosevka-charon-mono/latin-ext-500.css';
+@import '@fontsource/iosevka-charon-mono/latin-ext-700.css';
+@import '@fontsource-variable/manrope/wght.css';
 @import 'tailwindcss';
 
 @theme {
-  /* ── Surfaces ── */
-  --color-surface-base: #030806;
-  --color-surface-raised: #071210;
-  --color-surface-overlay: #0c1a16;
-  --color-muted: #162820;
+  /* Surfaces — zuricata_style_v3 PALETTE */
+  --color-surface-base: #000000;
+  --color-surface-raised: #0b0b0b;
+  --color-surface-overlay: #0b0b0b;
+  --color-muted: #1c1c1c;
+  --color-track: #1c1c1c;
 
-  /* ── Text ── */
-  --color-text-primary: #e0ffe8;
-  --color-text-secondary: #7eb88c;
-  --color-text-ghost: #4a7055;
+  /* Text */
+  --color-text-primary: #ffffff;
+  --color-text-body: #d8d8d8;
+  --color-text-secondary: #d8d8d8;
+  --color-text-bajada: #bebebe;
+  --color-text-label: #8e8e8e;
+  --color-text-ghost: #8e8e8e;
+  --color-text-faint: #555555;
 
-  /* ── Green — Primary accent ── */
-  --color-accent: #00e554;
-  --color-accent-bright: #00ff61;
-  --color-accent-dim: #00c04a;
+  /* Gold — the only accent */
+  --color-accent: #e6b45c;
+  --color-accent-bright: #e6b45c;
+  --color-accent-dim: #cc9757;
 
-  /* ── Border ── */
-  --color-border: #1a3020;
-  --color-border-hover: #00e55440;
+  /* Border */
+  --color-border: #2f2f2f;
+  --color-border-hover: #555555;
 
-  /* ── Fonts ── */
-  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+  /* Fonts */
+  --font-sans: 'Manrope Variable', 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Iosevka Charon Mono', ui-monospace, monospace;
 
-  /* ── Radius ── */
+  /* Tracking from v3 TYPE / TRACK_* */
+  --tracking-title: -0.03em;
+  --tracking-label: 0.32em;
+  --tracking-counter: 0.18em;
+
+  /* Radius */
   --radius-card: 0.5rem;
   --radius-tag: 0.25rem;
 }
@@ -39,8 +55,8 @@
   }
 
   body {
-    @apply bg-surface-base text-text-primary font-sans antialiased;
-    @apply leading-relaxed;
+    @apply bg-surface-base font-sans text-text-body antialiased;
+    line-height: 1.38;
   }
 
   ::selection {
@@ -49,10 +65,11 @@
   }
 
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-accent rounded-sm;
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 
-  /* ── Scrollbar ── */
   ::-webkit-scrollbar {
     width: 8px;
   }
@@ -70,30 +87,30 @@
     background: var(--color-border-hover);
   }
 
-  /* ── Headings ── */
   h1,
   h2,
   h3,
   h4 {
-    @apply font-mono font-bold tracking-tight text-text-primary;
+    @apply font-mono font-bold text-text-primary;
+    letter-spacing: var(--tracking-title);
   }
 
-  /* ── Links ── */
   a {
-    @apply text-accent transition-colors duration-200;
+    @apply text-text-primary transition-colors duration-200;
   }
 
   a:hover {
-    @apply text-accent-dim;
+    @apply text-accent;
   }
 
-  /* ── Code ── */
   code {
-    @apply font-mono text-[0.9em] bg-surface-raised px-1.5 py-0.5 rounded;
+    @apply rounded-sm bg-surface-raised px-1.5 py-0.5 font-mono text-[0.9em] text-text-primary;
   }
 
   pre {
-    @apply rounded-[--radius-card] border border-border p-4 overflow-x-auto;
+    @apply overflow-x-auto border border-border p-4;
+    border-radius: var(--radius-card);
+    background: var(--color-surface-raised);
   }
 
   pre code {
@@ -103,65 +120,160 @@
 
 @layer components {
   .card {
-    @apply bg-surface-raised/60 border border-border/60 rounded-[--radius-card] p-5;
-    @apply transition-all duration-200 ease-out;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-card);
+    background: transparent;
+    padding: 1.25rem;
+    transition: border-color 200ms ease;
   }
 
   .card:hover {
-    @apply border-border-hover bg-surface-raised;
-    transform: translateY(-2px);
+    border-color: var(--color-border-hover);
+  }
+
+  .card-inverted {
+    background: var(--color-text-primary);
+    border-color: var(--color-text-primary);
+    color: var(--color-surface-base);
+  }
+
+  .card-inverted:hover {
+    border-color: var(--color-text-primary);
+  }
+
+  .card-inverted h3,
+  .card-inverted .card-title {
+    color: var(--color-surface-base);
+  }
+
+  .card-inverted p,
+  .card-inverted .card-body {
+    color: #2f2f2f;
+  }
+
+  .card-inverted time {
+    color: #555555;
+  }
+
+  a.card-inverted:hover,
+  .card-inverted a:hover {
+    color: var(--color-surface-base);
   }
 
   .nav-link {
-    @apply font-mono text-sm text-text-secondary transition-colors duration-200;
-    @apply relative;
-  }
-
-  .nav-link::after {
-    content: '';
-    @apply absolute -bottom-0.5 left-0 h-px w-0 bg-accent;
-    @apply transition-[width] duration-200 ease-out;
+    @apply relative font-mono text-xs font-medium text-text-label;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
   }
 
   .nav-link:hover {
     @apply text-accent;
   }
 
-  .nav-link:hover::after {
-    @apply w-full;
+  .nav-link.is-active {
+    @apply font-bold text-text-primary;
   }
 
   .section-container {
     @apply mx-auto max-w-3xl px-6;
   }
 
-  .section-heading {
-    @apply font-mono text-text-ghost text-sm tracking-widest uppercase mb-8;
+  .section-kicker {
+    @apply mb-10 flex items-baseline justify-between gap-6;
   }
 
-  .terminal-prompt {
-    @apply font-mono text-accent;
+  .section-heading {
+    @apply m-0 font-mono text-xs font-medium text-text-label;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+  }
+
+  .section-counter {
+    @apply m-0 shrink-0 font-mono text-xs text-text-faint;
+    letter-spacing: var(--tracking-counter);
+  }
+
+  .gold-rule {
+    height: 2px;
+    width: 2.5rem;
+    background: var(--color-accent);
+  }
+
+  .tag-pill {
+    @apply inline-flex items-center font-mono font-bold text-surface-base;
+    background: var(--color-text-primary);
+    border-radius: var(--radius-tag);
+    font-size: 0.625rem;
+    letter-spacing: 0.2em;
+    line-height: 1;
+    padding: 0.4rem 0.65rem;
+    text-transform: uppercase;
+  }
+
+  .card-inverted .tag-pill {
+    background: var(--color-surface-base);
+    color: var(--color-text-primary);
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center font-mono text-sm font-medium text-text-primary no-underline;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-card);
+    letter-spacing: 0.12em;
+    min-height: 2.75rem;
+    padding: 0.55rem 1.15rem;
+    text-transform: uppercase;
+    transition:
+      border-color 200ms ease,
+      color 200ms ease,
+      background 200ms ease;
+  }
+
+  .btn:hover {
+    @apply text-text-primary;
+    border-color: var(--color-text-primary);
+  }
+
+  .btn-inverted {
+    @apply inline-flex items-center justify-center bg-text-primary font-mono text-sm font-medium text-surface-base no-underline;
+    border: 2px solid var(--color-text-primary);
+    border-radius: var(--radius-card);
+    letter-spacing: 0.12em;
+    min-height: 2.75rem;
+    padding: 0.55rem 1.15rem;
+    text-transform: uppercase;
+    transition:
+      border-color 200ms ease,
+      color 200ms ease,
+      background 200ms ease;
+  }
+
+  .btn-inverted:hover {
+    background: var(--color-text-primary);
+    color: var(--color-surface-base);
+    border-color: var(--color-text-primary);
   }
 
   .prose-content {
-    @apply leading-relaxed text-text-primary;
+    @apply font-sans text-text-body;
+    line-height: 1.38;
   }
 
   .prose-content h2 {
-    @apply text-2xl mt-12 mb-4;
+    @apply mb-4 mt-12 text-2xl;
   }
 
   .prose-content h3 {
-    @apply text-xl mt-8 mb-3;
+    @apply mb-3 mt-8 text-xl;
   }
 
   .prose-content p {
-    @apply mb-6 text-text-secondary;
+    @apply mb-6 text-text-body;
   }
 
   .prose-content ul,
   .prose-content ol {
-    @apply mb-6 pl-6 text-text-secondary;
+    @apply mb-6 pl-6 text-text-body;
   }
 
   .prose-content ul {
@@ -177,15 +289,15 @@
   }
 
   .prose-content blockquote {
-    @apply border-l-2 border-accent pl-4 italic text-text-ghost my-6;
+    @apply my-6 border-l-2 border-border pl-4 italic text-text-bajada;
   }
 
   .prose-content a {
-    @apply text-accent underline underline-offset-4 decoration-accent/40;
+    @apply text-text-primary underline decoration-border underline-offset-4;
   }
 
   .prose-content a:hover {
-    @apply decoration-accent;
+    @apply text-accent decoration-accent;
   }
 
   .prose-content pre {
@@ -193,11 +305,12 @@
   }
 
   .prose-content hr {
-    @apply border-border my-10;
+    @apply my-10 border-border;
   }
 
   .prose-content img {
-    @apply rounded-[--radius-card] my-6;
+    @apply my-6;
+    border-radius: var(--radius-card);
   }
 
   .prose-content strong {

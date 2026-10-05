@@ -17,7 +17,7 @@ export default defineConfig({
   },
   markdown: {
     shikiConfig: {
-      theme: 'tokyo-night',
+      theme: 'vitesse-black',
     },
   },
 });

@@ -1,48 +1,42 @@
 ---
 import { Image } from 'astro:assets';
 import zuricataImg from '@/assets/zuricata.png';
-import TerminalBlink from '@components/islands/TerminalBlink';
+import SectionHeader from './SectionHeader.astro';
 ---
 
-<section class="py-16 md:py-20">
-  <div class="section-container flex flex-col-reverse items-center gap-10 md:flex-row md:items-center md:gap-16">
-    <div class="flex-1">
-      <p class="terminal-prompt mb-3 text-sm">$ whoami</p>
+<section class="py-20 md:py-28">
+  <div class="section-container">
+    <SectionHeader kicker="whoami" counter="01 / 04" />
 
-      <h1 class="text-3xl md:text-4xl leading-tight mb-5">
-        zuricata<span class="text-text-ghost">.dev</span>
-        <TerminalBlink client:load />
-      </h1>
+    <div
+      class="flex flex-col-reverse items-center gap-12 md:flex-row md:items-center md:gap-16"
+    >
+      <div class="flex-1">
+        <h1 class="mb-5 text-5xl leading-[0.95] md:text-6xl">
+          zuricata<span class="text-text-label">.dev</span>
+        </h1>
+        <div class="gold-rule mb-8"></div>
 
-      <p class="max-w-lg text-text-secondary leading-relaxed mb-8">
-        I build products with AI at the core — from tourism platforms on Lightning
-        to legal AI agents. I automate everything else. If it can be built, I ship it.
-      </p>
+        <p class="mb-10 max-w-lg text-text-body">
+          I build products with AI at the core — from tourism platforms on Lightning
+          to legal AI agents. I automate everything else. If it can be built, I ship it.
+        </p>
 
-      <div class="flex gap-3">
-        <a
-          href="/blog"
-          class="inline-flex items-center rounded-[--radius-card] border border-accent/60 px-4 py-2 font-mono text-sm text-accent no-underline transition-all duration-200 hover:bg-accent/10 hover:border-accent"
-        >
-          ~/blog
-        </a>
-        <a
-          href="/projects"
-          class="inline-flex items-center rounded-[--radius-card] border border-border px-4 py-2 font-mono text-sm text-text-secondary no-underline transition-all duration-200 hover:border-accent/40 hover:text-accent"
-        >
-          ~/projects
-        </a>
+        <div class="flex flex-wrap gap-3">
+          <a href="/blog" class="btn-inverted">Blog</a>
+          <a href="/projects" class="btn">Projects</a>
+        </div>
       </div>
-    </div>
 
-    <div class="flex-shrink-0">
-      <Image
-        src={zuricataImg}
-        alt="zuricata"
-        width={280}
-        height={280}
-        class="rounded-full border border-border/60"
-      />
+      <div class="shrink-0 overflow-hidden rounded-full border border-border">
+        <Image
+          src={zuricataImg}
+          alt="zuricata"
+          width={280}
+          height={280}
+          class="size-[220px] rounded-full md:size-[260px]"
+        />
+      </div>
     </div>
   </div>
 </section>
