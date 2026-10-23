@@ -1,0 +1,42 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import SectionHeader from '@components/ui/SectionHeader.astro';
+import TalkCard from '@components/ui/TalkCard.astro';
+import { talks } from '@data/talks';
+
+const total = String(talks.length).padStart(2, '0');
+---
+
+<BaseLayout
+  lang="es"
+  title="Charlas"
+  description="Charlas de La Zuricata. Mazos sobre agentes, protocolos y las herramientas con las que trabajo."
+>
+  <section class="py-16 md:py-24">
+    <div class="section-container">
+      <SectionHeader kicker="charlas" counter={`01 / ${total}`} />
+      <h1 class="mb-4 text-4xl leading-tight md:text-5xl">Charlas</h1>
+      <div class="gold-rule mb-8"></div>
+
+      <p class="mb-12 max-w-xl text-text-body">
+        Slides de las charlas que di. Cada mazo se abre igual que en la proyección:
+        flechas o espacio para pasar de slide.
+      </p>
+
+      <div class="grid gap-4">
+        {
+          talks.map((talk, index) => (
+            <TalkCard
+              title={talk.title}
+              description={talk.description}
+              meta={talk.meta}
+              date={talk.date}
+              href={`/talks/${talk.slug}/`}
+              inverted={index === 0}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
