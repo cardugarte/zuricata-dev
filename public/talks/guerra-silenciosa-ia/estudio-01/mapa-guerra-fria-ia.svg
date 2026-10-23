@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#172033" stroke-width="1"/>
+    </pattern>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#38bdf8"/></marker>
+    <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#fb7185"/></marker>
+    <marker id="arrowGold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#fbbf24"/></marker>
+    <filter id="shadow"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000" flood-opacity=".35"/></filter>
+    <style>
+      .title{font:700 38px Arial,sans-serif;fill:#f8fafc}.sub{font:400 18px Arial,sans-serif;fill:#94a3b8}.country{font:700 27px Arial,sans-serif;fill:#fff}.small{font:400 15px Arial,sans-serif;fill:#cbd5e1}.tiny{font:400 12px Arial,sans-serif;fill:#94a3b8}.nodeTitle{font:700 17px Arial,sans-serif;fill:#f8fafc}.nodeText{font:400 13px Arial,sans-serif;fill:#cbd5e1}.row{font:700 15px Arial,sans-serif;fill:#e2e8f0;letter-spacing:1px}.centerTitle{font:700 16px Arial,sans-serif;fill:#fbbf24}.quote{font:700 24px Arial,sans-serif;fill:#f8fafc}.source{font:400 11px Arial,sans-serif;fill:#64748b}
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="#07101f"/>
+  <rect width="1600" height="900" fill="url(#grid)" opacity=".65"/>
+
+  <circle cx="72" cy="64" r="9" fill="#fbbf24"/>
+  <text x="96" y="76" class="title">La Guerra Fría de la IA no ocurre en un solo frente</text>
+  <text x="96" y="108" class="sub">Modelos abiertos y cerrados son armas dentro de una disputa por chips, nube, datos, estándares y capacidad de salida.</text>
+
+  <rect x="55" y="140" width="455" height="585" rx="22" fill="#082f49" fill-opacity=".46" stroke="#38bdf8" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="1090" y="140" width="455" height="585" rx="22" fill="#4c1025" fill-opacity=".42" stroke="#fb7185" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="540" y="140" width="520" height="585" rx="22" fill="#261c08" fill-opacity=".48" stroke="#fbbf24" stroke-width="2" stroke-dasharray="10 7"/>
+
+  <text x="85" y="184" class="country">ESTADOS UNIDOS</text>
+  <text x="85" y="211" class="small">Estrategia: controlar cuellos de botella + exportar el stack completo</text>
+  <text x="1120" y="184" class="country">CHINA</text>
+  <text x="1120" y="211" class="small">Estrategia: eficiencia + despliegue industrial + difusión open-weight</text>
+  <text x="800" y="181" text-anchor="middle" class="country">ZONA DE DISPUTA</text>
+  <text x="800" y="208" text-anchor="middle" class="small">La adopción global convierte tecnología en dependencia o autonomía</text>
+
+  <!-- Row labels -->
+  <g>
+    <rect x="20" y="243" width="105" height="26" rx="13" fill="#1e293b"/><text x="72" y="261" text-anchor="middle" class="row">CHIPS</text>
+    <rect x="20" y="343" width="105" height="26" rx="13" fill="#1e293b"/><text x="72" y="361" text-anchor="middle" class="row">NUBE</text>
+    <rect x="20" y="443" width="105" height="26" rx="13" fill="#1e293b"/><text x="72" y="461" text-anchor="middle" class="row">MODELOS</text>
+    <rect x="20" y="543" width="105" height="26" rx="13" fill="#1e293b"/><text x="72" y="561" text-anchor="middle" class="row">DATOS</text>
+    <rect x="20" y="643" width="105" height="26" rx="13" fill="#1e293b"/><text x="72" y="661" text-anchor="middle" class="row">NORMAS</text>
+  </g>
+
+  <!-- US nodes -->
+  <g>
+    <rect x="145" y="231" width="330" height="65" rx="10" fill="#0f172a" stroke="#38bdf8"/><text x="165" y="255" class="nodeTitle">Diseño + ecosistema de aceleración</text><text x="165" y="278" class="nodeText">Nvidia, CUDA, controles de exportación</text>
+    <rect x="145" y="331" width="330" height="65" rx="10" fill="#0f172a" stroke="#38bdf8"/><text x="165" y="355" class="nodeTitle">Hiperscalers globales</text><text x="165" y="378" class="nodeText">AWS · Azure · Google Cloud · data centers</text>
+    <rect x="145" y="431" width="330" height="65" rx="10" fill="#0f172a" stroke="#38bdf8"/><text x="165" y="455" class="nodeTitle">Frontera cerrada + apertura selectiva</text><text x="165" y="478" class="nodeText">APIs líderes · gpt-oss · Llama con restricciones</text>
+    <rect x="145" y="531" width="330" height="65" rx="10" fill="#0f172a" stroke="#38bdf8"/><text x="165" y="555" class="nodeTitle">Software empresarial y plataformas</text><text x="165" y="578" class="nodeText">Ingresos, telemetría, integración y lock-in</text>
+    <rect x="145" y="631" width="330" height="65" rx="10" fill="#0f172a" stroke="#38bdf8"/><text x="165" y="655" class="nodeTitle">“Stack americano”</text><text x="165" y="678" class="nodeText">Hardware + nube + modelos + estándares</text>
+  </g>
+
+  <!-- China nodes -->
+  <g>
+    <rect x="1125" y="231" width="385" height="65" rx="10" fill="#0f172a" stroke="#fb7185"/><text x="1145" y="255" class="nodeTitle">Sustitución local bajo restricción</text><text x="1145" y="278" class="nodeText">Huawei · integración hardware/software · escala industrial</text>
+    <rect x="1125" y="331" width="385" height="65" rx="10" fill="#0f172a" stroke="#fb7185"/><text x="1145" y="355" class="nodeTitle">Mercado interno + nube regional</text><text x="1145" y="378" class="nodeText">Alibaba · Tencent · despliegue a gran escala</text>
+    <rect x="1125" y="431" width="385" height="65" rx="10" fill="#0f172a" stroke="#fb7185"/><text x="1145" y="455" class="nodeTitle">Difusión de pesos abiertos</text><text x="1145" y="478" class="nodeText">Qwen · DeepSeek · derivados · precios bajos</text>
+    <rect x="1125" y="531" width="385" height="65" rx="10" fill="#0f172a" stroke="#fb7185"/><text x="1145" y="555" class="nodeTitle">Mundo físico como laboratorio</text><text x="1145" y="578" class="nodeText">Manufactura · robótica · logística · datos industriales</text>
+    <rect x="1125" y="631" width="385" height="65" rx="10" fill="#0f172a" stroke="#fb7185"/><text x="1145" y="655" class="nodeTitle">“IA como bien público”</text><text x="1145" y="678" class="nodeText">AI Plus · cooperación · narrativa del Sur Global</text>
+  </g>
+
+  <!-- Center contested items -->
+  <g>
+    <rect x="590" y="235" width="420" height="54" rx="27" fill="#3b2806" stroke="#fbbf24"/><text x="800" y="258" text-anchor="middle" class="centerTitle">CONTROL DE CÓMPUTO</text><text x="800" y="278" text-anchor="middle" class="tiny">restricciones vs. sustitución, eficiencia y desvíos</text>
+    <rect x="590" y="335" width="420" height="54" rx="27" fill="#3b2806" stroke="#fbbf24"/><text x="800" y="358" text-anchor="middle" class="centerTitle">EL INTERRUPTOR</text><text x="800" y="378" text-anchor="middle" class="tiny">¿quién puede limitar acceso, precio o jurisdicción?</text>
+    <rect x="590" y="435" width="420" height="54" rx="27" fill="#3b2806" stroke="#fbbf24"/><text x="800" y="458" text-anchor="middle" class="centerTitle">CERRADO VS. OPEN-WEIGHT</text><text x="800" y="478" text-anchor="middle" class="tiny">control central vs. difusión irreversible y forks</text>
+    <rect x="590" y="535" width="420" height="54" rx="27" fill="#3b2806" stroke="#fbbf24"/><text x="800" y="558" text-anchor="middle" class="centerTitle">EFECTOS DE RED</text><text x="800" y="578" text-anchor="middle" class="tiny">uso &gt; derivados &gt; integración &gt; más uso</text>
+    <rect x="590" y="635" width="420" height="54" rx="27" fill="#3b2806" stroke="#fbbf24"/><text x="800" y="658" text-anchor="middle" class="centerTitle">ESTÁNDARES Y VALORES</text><text x="800" y="678" text-anchor="middle" class="tiny">“libertad” y “bien público” también son propaganda</text>
+  </g>
+
+  <!-- Directional arrows -->
+  <g fill="none" stroke-width="2.5" opacity=".9">
+    <path d="M475 263H580" stroke="#38bdf8" marker-end="url(#arrowBlue)"/>
+    <path d="M1125 263H1020" stroke="#fb7185" marker-end="url(#arrowRed)"/>
+    <path d="M475 363H580" stroke="#38bdf8" marker-end="url(#arrowBlue)"/>
+    <path d="M1125 363H1020" stroke="#fb7185" marker-end="url(#arrowRed)"/>
+    <path d="M475 463H580" stroke="#38bdf8" marker-end="url(#arrowBlue)"/>
+    <path d="M1125 463H1020" stroke="#fb7185" marker-end="url(#arrowRed)"/>
+    <path d="M475 563H580" stroke="#38bdf8" marker-end="url(#arrowBlue)"/>
+    <path d="M1125 563H1020" stroke="#fb7185" marker-end="url(#arrowRed)"/>
+    <path d="M475 663H580" stroke="#38bdf8" marker-end="url(#arrowBlue)"/>
+    <path d="M1125 663H1020" stroke="#fb7185" marker-end="url(#arrowRed)"/>
+  </g>
+
+  <!-- LatAm footer -->
+  <rect x="80" y="755" width="1440" height="103" rx="18" fill="#121a2a" stroke="#a78bfa" stroke-width="2" filter="url(#shadow)"/>
+  <text x="115" y="790" class="nodeTitle" fill="#c4b5fd">AMÉRICA LATINA: ¿ALIADO, MERCADO O ACTOR?</text>
+  <text x="115" y="824" class="quote">La soberanía empieza cuando cambiar de modelo deja de ser una crisis institucional.</text>
+  <text x="1185" y="788" class="tiny">CAPACIDADES MÍNIMAS</text>
+  <text x="1185" y="812" class="nodeText">datos propios · evaluación local</text>
+  <text x="1185" y="834" class="nodeText">portabilidad · compras públicas</text>
+  <text x="1185" y="852" class="nodeText">derecho de salida</text>
+
+  <text x="80" y="885" class="source">Fuentes y base factual: Stanford AI Index 2026 [2][20] · White House [3] · BIS [4] · State Council China [5] · USCC [14]. Síntesis e interpretación editorial propia.</text>
+</svg>

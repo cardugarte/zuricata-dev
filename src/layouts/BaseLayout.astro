@@ -7,11 +7,13 @@ import '@/styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  lang?: string;
 }
 
 const {
   title,
   description = 'Privacy, security & AI — by zuricata',
+  lang = 'en',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -19,7 +21,7 @@ const ogImage = new URL('/og.png', Astro.site);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

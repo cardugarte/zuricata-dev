@@ -1,0 +1,1 @@
+import{_ as i}from"./SlideLayout.astro_astro_type_script_index_0_lang.DPFlULrr.js";var r=class{constructor(t){this.init=t,this.records=this.init()}static{i(this,"ImperativeState")}reset(){this.records=this.init()}};export{r as I};

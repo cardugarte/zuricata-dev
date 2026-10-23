@@ -10,7 +10,18 @@ import vercel from '@astrojs/vercel';
 export default defineConfig({
   site: 'https://zuricata.dev',
   output: 'static',
-  integrations: [react(), mdx(), sitemap()],
+  integrations: [
+    react(),
+    mdx(),
+    sitemap({
+      customPages: [
+        'https://zuricata.dev/talks/campamento-de-agentes/',
+        'https://zuricata.dev/talks/punatech-2026/',
+        'https://zuricata.dev/talks/agents-at-work/',
+        'https://zuricata.dev/talks/guerra-silenciosa-ia/',
+      ],
+    }),
+  ],
   adapter: vercel(),
   vite: {
     plugins: [tailwindcss()],

@@ -1,0 +1,43 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  meta: string;
+  href: string;
+  date?: string;
+  inverted?: boolean;
+}
+
+const { title, description, meta, href, date, inverted = false } = Astro.props;
+---
+
+<a
+  href={href}
+  data-astro-reload
+  class:list={['card block no-underline', inverted && 'card-inverted']}
+>
+  <article>
+    <time
+      class="talk-meta font-mono text-xs uppercase tracking-[0.18em] text-text-label"
+      datetime={date}
+    >
+      {meta}
+    </time>
+    <h3 class="card-title mt-3 text-xl leading-tight">{title}</h3>
+    <p class="card-body mt-3 text-sm">{description}</p>
+    <p
+      class:list={[
+        'mt-5 font-mono text-xs uppercase tracking-[0.18em]',
+        inverted ? 'text-surface-base' : 'text-text-primary',
+      ]}
+    >
+      Ver charla
+    </p>
+  </article>
+</a>
+
+<style>
+  .card-inverted .talk-meta {
+    color: #555555;
+  }
+</style>
