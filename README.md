@@ -54,7 +54,17 @@ X exports in this repo are a `<name>.md` body plus a sibling `<name>.tags.json`.
 node scripts/import-x-article.mjs content/x-articles-src/01-cve.md
 ```
 
-The script copies the Markdown body byte for byte. Frontmatter comes from the tags file: `slug` from `d`, `title`, `summary`, `cover` from `image`, `tags` from every `t`, `xUrl` from `r`. If `published_at` is the placeholder `AL_PUBLICAR`, the Unix time is taken from `inventario-articles.md` by matching the `d` slug. `nostrUrl` is set only when that inventory mentions the same slug with an `https://njump.me/...` link.
+The script copies the Markdown body byte for byte, then drops one trailing block when it is present:
+
+```md
+---
+
+Publicado originalmente en X: https://x.com/LaZuricata/status/<id>
+```
+
+That status URL must match `r` in the tags file, which is the footer "Leer en X" link. Anything before that block is unchanged. After the strip, the script refuses the import if the body still contains an http(s) URL that is not a Blossom image (`*.blossom.band` or `blossom.primal.net`, with an image extension).
+
+Frontmatter comes from the tags file: `slug` from `d`, `title`, `summary`, `cover` from `image`, `tags` from every `t`, `xUrl` from `r`. If `published_at` is the placeholder `AL_PUBLICAR`, the Unix time is taken from `inventario-articles.md` by matching the `d` slug. `nostrUrl` is `https://njump.me/<naddr>` when `registro-nostr.md` has that `d` slug and a filled `naddr` cell. Re-run the script after adding a row.
 
 Overrides, when the inventory is absent or you need to correct a value:
 
@@ -64,4 +74,8 @@ node scripts/import-x-article.mjs path/to/article.md \
   --nostr-url https://njump.me/naddr1...
 ```
 
-Running the script again overwrites `src/articles/<slug>.md`. A cleaned source `.md` can be re-imported the same way: the body is replaced and the page still adds "Leer en X" and, when `nostrUrl` is present, "Ver en Nostr" after the body.
+Running the script again overwrites `src/articles/<slug>.md`. The page still adds "Leer en X" and, when `nostrUrl` is present, "Ver en Nostr" after the body.
+
+```sh
+node --test scripts/import-x-article.test.mjs
+```

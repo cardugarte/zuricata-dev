@@ -64,13 +64,13 @@ Cuántas de tus contraseñas aguantarían una filtración?
 
 ## Fuentes
 
-- Reclamo de la filtración (Brinztech): https://www.brinztech.com/breach-alerts/brinztech-alert-threat-actor-dbhunter-leaks-129000-customer-records-allegedly-sourced-from-telecom-argentinas-personal-brand/
-- Verizon DBIR 2026: https://www.verizon.com/about/news/breach-industry-wide-dbir-finds
-- Verizon, credential stuffing (DBIR 2025): https://www.verizon.com/business/resources/articles/credential-stuffing-attacks-2025-dbir-research/
-- Hive Systems Password Table 2026: https://www.hivesystems.com/blog/are-your-passwords-in-the-green
-- NIST SP 800-63B: https://pages.nist.gov/800-63-4/sp800-63b.html
-- EFF, passphrases: https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases
-- Vaultwarden: https://github.com/dani-garcia/vaultwarden
+- Reclamo de la filtración (Brinztech)
+- Verizon DBIR 2026
+- Verizon, credential stuffing (DBIR 2025)
+- Hive Systems Password Table 2026
+- NIST SP 800-63B
+- EFF, passphrases
+- Vaultwarden
 
 ---
 

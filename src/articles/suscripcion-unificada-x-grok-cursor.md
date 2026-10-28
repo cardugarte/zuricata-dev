@@ -100,17 +100,14 @@ Para un builder que vive entre X, Grok, Grok Bot y Cursor, tener todo en un plan
 
 ## Fuentes
 
-- Anuncio oficial: https://x.ai/news/x-subscription
-- Post de lanzamiento de [@SpaceXSI](https://x.com/SpaceXSI): https://x.com/SpaceXSI/status/2109783335296008414
-- Precios y planes: https://x.ai/pricing
-- Docs, precios: https://docs.x.ai/x-subscription/pricing
-- Docs, límites de uso: https://docs.x.ai/x-subscription/usage-limits
-- Docs, qué pasa al migrar: https://docs.x.ai/x-subscription/overview
-- Docs, X Premium en The X Subscription: https://docs.x.ai/x-subscription/x-premium
-- Cursor, uso y límites: https://cursor.com/help/models-and-usage/usage-limits
-- Cursor se une a SpaceX: https://cursor.com/blog/joining-spacex
-- TechCrunch: https://techcrunch.com/2026/10/13/spacexsi-bundles-x-premium-grok-and-cursor-into-one-subscription/
+- Anuncio oficial
+- Post de lanzamiento de @SpaceXSI
+- Precios y planes
+- Docs, precios
+- Docs, límites de uso
+- Docs, qué pasa al migrar
+- Docs, X Premium en The X Subscription
+- Cursor, uso y límites
+- Cursor se une a SpaceX
+- TechCrunch
 
----
-
-Publicado originalmente en X: https://x.com/LaZuricata/status/2111824024070148595

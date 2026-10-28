@@ -47,6 +47,3 @@ El mouse es una pausa. La pausa es el enemigo.
 
 #AgenticEngineering #CLI #Neovim #Bitcoin
 
----
-
-Publicado originalmente en X: https://x.com/LaZuricata/status/2064392957550076165

@@ -3,13 +3,18 @@
  * Import one X Article export into src/articles/<slug>.md.
  *
  * Inputs (same folder, same basename):
- *   <name>.md         published Markdown. Copied byte for byte after the frontmatter.
+ *   <name>.md         published Markdown. Copied byte for byte, except the
+ *                     trailing "Publicado originalmente en X" credit, which the
+ *                     page footer already links.
  *   <name>.tags.json  NIP-23 tags: d, title, summary, image, t, r, published_at.
  *
  * published_at in the tags file is ignored when it is the placeholder AL_PUBLICAR.
  * The Unix time then comes from inventario-articles.md (match on the d slug) or
- * from --published-at. nostrUrl is set only from a njump.me link on the inventory
- * line for that slug, or from --nostr-url.
+ * from --published-at.
+ *
+ * nostrUrl comes from registro-nostr.md (column d, column naddr) as
+ * https://njump.me/<naddr>. --nostr-url overrides that. If the registro file is
+ * absent, a njump.me link on the inventory line for the same slug is used.
  *
  * Usage:
  *   node scripts/import-x-article.mjs content/x-articles-src/01-cve.md
@@ -18,8 +23,10 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 const PLACEHOLDER_DATE = 'AL_PUBLICAR';
+const CREDIT_LABEL = 'Publicado originalmente en X: ';
 
 function usage() {
   console.log(`Usage: node scripts/import-x-article.mjs <article.md> [options]
@@ -27,9 +34,10 @@ function usage() {
 Options:
   --tags <file>           Tags JSON. Default: <article>.tags.json
   --inventory <file>      Inventory markdown. Default: inventario-articles.md next to the article
+  --registro <file>       Nostr table. Default: registro-nostr.md next to the article
   --out <dir>             Output directory. Default: src/articles
   --published-at <unix>   Unix seconds. Wins over the tags file and the inventory
-  --nostr-url <url>       Optional Nostr URL. Wins over the inventory
+  --nostr-url <url>       Optional Nostr URL. Wins over the registro
   --help                  Show this help
 `);
 }
@@ -103,6 +111,65 @@ function lookupInventory(inventoryText, slug) {
   return { publishedAt, nostrUrl };
 }
 
+function unescapeCell(value) {
+  const trimmed = value.trim();
+  const quoted = trimmed.match(/^`([^`]*)`$/);
+  return (quoted ? quoted[1] : trimmed).trim();
+}
+
+function splitRow(line) {
+  const trimmed = line.trim();
+  if (!trimmed.startsWith('|')) return null;
+  const cells = trimmed.split('|');
+  if (cells[0] === '') cells.shift();
+  if (cells.at(-1)?.trim() === '') cells.pop();
+  return cells.map(unescapeCell);
+}
+
+function isSeparator(cells) {
+  return cells.length > 0 && cells.every((cell) => /^:?-{3,}:?$/.test(cell));
+}
+
+/**
+ * Read an naddr from a registro-nostr.md table. Column `d` is the slug.
+ * An empty naddr cell means the note is not published yet.
+ */
+export function lookupRegistro(registroText, slug) {
+  const lines = registroText.split(/\r?\n/);
+  let dIndex = -1;
+  let naddrIndex = -1;
+  let seen = null;
+
+  for (const line of lines) {
+    const cells = splitRow(line);
+    if (!cells) continue;
+    if (dIndex === -1) {
+      if (cells.includes('d') && cells.includes('naddr')) {
+        dIndex = cells.indexOf('d');
+        naddrIndex = cells.indexOf('naddr');
+      }
+      continue;
+    }
+    if (isSeparator(cells)) continue;
+    if (cells[dIndex] !== slug) continue;
+    const naddr = cells[naddrIndex] ?? '';
+    if (!naddr || naddr === '-') continue;
+    if (seen && seen !== naddr) {
+      throw new Error(`Registro lists more than one naddr for ${slug}`);
+    }
+    seen = naddr;
+  }
+
+  return seen;
+}
+
+export function nostrUrlFromNaddr(naddr) {
+  if (!/^naddr1[a-z0-9]+$/.test(naddr)) {
+    throw new Error(`Registro naddr is not a bech32 naddr1 value: ${naddr}`);
+  }
+  return `https://njump.me/${naddr}`;
+}
+
 function toIso(value) {
   const text = String(value).trim();
   if (/^\d+$/.test(text)) {
@@ -136,6 +203,67 @@ function buildFrontmatter({ slug, title, summary, cover, tags, xUrl, publishedAt
   return lines.join('\n');
 }
 
+/**
+ * Drop only the trailing block
+ *   ---\n\nPublicado originalmente en X: <xUrl>\n
+ * The kept prefix must be a byte prefix of the source.
+ */
+export function stripTrailingXCredit(body, xUrl) {
+  const text = body.toString('utf8');
+  const mismatched = text.match(
+    /\n---\n\nPublicado originalmente en X: (https:\/\/x\.com\/LaZuricata\/status\/\d+)\n$/,
+  );
+  if (mismatched && mismatched[1] !== xUrl) {
+    throw new Error(`Trailing X URL ${mismatched[1]} does not match tags r ${xUrl}`);
+  }
+
+  const block = `---\n\n${CREDIT_LABEL}${xUrl}\n`;
+  if (!text.endsWith(block)) return body;
+  const start = text.length - block.length;
+  if (start > 0 && text[start - 1] !== '\n') {
+    throw new Error('X credit is not its own trailing block');
+  }
+
+  const kept = Buffer.from(text.slice(0, start), 'utf8');
+  if (!body.subarray(0, kept.length).equals(kept)) {
+    throw new Error('Stripping the X credit would change bytes before that block');
+  }
+  if (!body.subarray(kept.length).equals(Buffer.from(block, 'utf8'))) {
+    throw new Error('Trailing block bytes do not match the X credit');
+  }
+  return kept;
+}
+
+export function isBlossomImageUrl(raw) {
+  let url;
+  try {
+    url = new URL(raw);
+  } catch {
+    return false;
+  }
+  if (url.protocol !== 'https:' && url.protocol !== 'http:') return false;
+  const host = url.hostname.toLowerCase();
+  const blossom =
+    host === 'blossom.band' ||
+    host.endsWith('.blossom.band') ||
+    host === 'blossom.primal.net' ||
+    host.endsWith('.blossom.primal.net');
+  if (!blossom) return false;
+  return /\.(png|jpe?g|gif|webp|avif)$/i.test(url.pathname);
+}
+
+/** Fail if the body still has an http(s) URL that is not a Blossom image. */
+export function assertNoExternalLinks(body, slug) {
+  const text = body.toString('utf8');
+  const found = text.match(/https?:\/\/[^\s)<>\]]+/g) ?? [];
+  const bad = found.filter((url) => !isBlossomImageUrl(url));
+  if (bad.length > 0) {
+    throw new Error(
+      `Article ${slug} still has non-Blossom links after import:\n${bad.map((url) => `  ${url}`).join('\n')}`,
+    );
+  }
+}
+
 function assertBodyPreserved(written, body) {
   const closing = Buffer.from('\n---\n');
   const at = written.indexOf(closing);
@@ -144,7 +272,7 @@ function assertBodyPreserved(written, body) {
   }
   const extracted = written.subarray(at + closing.length);
   if (!extracted.equals(body)) {
-    throw new Error('Body bytes do not match the source Markdown');
+    throw new Error('Body bytes do not match the imported Markdown');
   }
 }
 
@@ -187,6 +315,15 @@ function main() {
     ? lookupInventory(fs.readFileSync(inventoryPath, 'utf8'), slug)
     : { publishedAt: null, nostrUrl: null };
 
+  const registroPath = path.resolve(
+    args.registro ?? path.join(path.dirname(mdPath), 'registro-nostr.md'),
+  );
+  let nostrFromRegistro = null;
+  if (fs.existsSync(registroPath)) {
+    const naddr = lookupRegistro(fs.readFileSync(registroPath, 'utf8'), slug);
+    if (naddr) nostrFromRegistro = nostrUrlFromNaddr(naddr);
+  }
+
   const tagsDate =
     fields.published_at && fields.published_at !== PLACEHOLDER_DATE ? fields.published_at : null;
   const publishedRaw = args['published-at'] ?? tagsDate ?? inventory.publishedAt;
@@ -196,13 +333,15 @@ function main() {
     );
   }
 
-  const nostrUrl = args['nostr-url'] ?? inventory.nostrUrl ?? null;
+  const nostrUrl = args['nostr-url'] ?? nostrFromRegistro ?? (fs.existsSync(registroPath) ? null : inventory.nostrUrl);
   const publishedAt = toIso(publishedRaw);
   const outDir = path.resolve(args.out ?? path.join(process.cwd(), 'src/articles'));
   fs.mkdirSync(outDir, { recursive: true });
 
   const outPath = path.join(outDir, `${slug}.md`);
-  const body = fs.readFileSync(mdPath);
+  const source = fs.readFileSync(mdPath);
+  const body = stripTrailingXCredit(source, xUrl);
+  assertNoExternalLinks(body, slug);
   const header = Buffer.from(
     buildFrontmatter({ slug, title, summary, cover, tags, xUrl, publishedAt, nostrUrl }),
     'utf8',
@@ -212,13 +351,17 @@ function main() {
   fs.writeFileSync(outPath, written);
 
   console.log(
-    `${path.relative(process.cwd(), outPath)}  publishedAt=${publishedAt}  nostr=${nostrUrl ? 'yes' : 'no'}  tags=${tags.length}`,
+    `${path.relative(process.cwd(), outPath)}  publishedAt=${publishedAt}  nostr=${nostrUrl ? 'yes' : 'no'}  tags=${tags.length}  stripped=${body.length !== source.length ? 'credit' : 'none'}`,
   );
 }
 
-try {
-  main();
-} catch (error) {
-  console.error(error instanceof Error ? error.message : error);
-  process.exit(1);
+const isDirect = process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href;
+
+if (isDirect) {
+  try {
+    main();
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : error);
+    process.exit(1);
+  }
 }

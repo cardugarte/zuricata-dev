@@ -120,27 +120,27 @@ Vos de qué lado de la lupa preferís estar?
 
 ## Fuentes
 
-- CVE Tracker, el gráfico original: https://cve.0xosprey.com/
-- CVEProject/cvelistV5 (datos crudos, cálculo propio): https://github.com/CVEProject/cvelistV5
-- FlagThis, análisis del salto de CVEs por CNA: https://flagthis.com/posts/cve-surge
-- jgamblin/monthlyCVEStats: https://github.com/jgamblin/monthlyCVEStats
-- FIRST, pronóstico de vulnerabilidades 2026: https://www.first.org/newsroom/releases/20260615
-- tecunningham, datos de descubrimiento con IA: https://tecunningham.github.io/ai-discovery-data/cumulative.html
-- Anthropic, Claude Mythos Preview: https://www.anthropic.com/research/mythos-preview
-- Anthropic, tablero de divulgación coordinada: https://red.anthropic.com/2026/cvd/
-- Anthropic, Project Glasswing: https://www.anthropic.com/research/glasswing-initial-update
-- InfoQ, Claude Code y el bug de NFS en Linux: https://www.infoq.com/news/2026/04/claude-code-linux-vulnerability/
-- Cloud Security Alliance, depthfirst y FFmpeg: https://labs.cloudsecurityalliance.org/research/csa-research-note-autonomous-ai-ffmpeg-zerodav-discovery-eco/
-- OpenAI, Aardvark: https://openai.com/index/introducing-aardvark/
-- XBOW en HackerOne: https://xbow.com/blog/top-1-how-xbow-did-it
-- DARPA AIxCC, resultados: https://www.darpa.mil/news/2025/aixcc-results
-- Brinqa, Patch Tuesday CVE tracker: https://www.brinqa.com/blog/patch-tuesday-cve-tracker
-- VulnCheck, State of Exploitation 1H 2026: https://wwv.vulncheck.com/hubfs/Research/State-of-Exploitation-1H-2026.pdf
-- Alexopoulos et al., USENIX Security 2022: https://www.usenix.org/conference/usenixsecurity22/presentation/alexopoulos
-- Daniel Stenberg, el fin del bug bounty de curl: https://daniel.haxx.se/blog/2026/01/26/the-end-of-the-curl-bug-bounty/
-- Daniel Stenberg en LinkedIn: https://www.linkedin.com/posts/danielstenberg_hackerone-activity-7446667043996725249-ZhEU
-- Veracode GenAI Code Security Report 2025: https://www.veracode.com/blog/genai-code-security-report/
-- Tom's Hardware, Torvalds y el "90% marketing": https://www.tomshardware.com/tech-industry/artificial-intelligence/linus-torvalds-reckons-ai-is-90-percent-marketing-and-10-percent-reality
+- CVE Tracker, el gráfico original:
+- CVEProject/cvelistV5 (datos crudos, cálculo propio):
+- FlagThis, análisis del salto de CVEs por CNA:
+- jgamblin/monthlyCVEStats:
+- FIRST, pronóstico de vulnerabilidades 2026:
+- tecunningham, datos de descubrimiento con IA:
+- Anthropic, Claude Mythos Preview:
+- Anthropic, tablero de divulgación coordinada:
+- Anthropic, Project Glasswing:
+- InfoQ, Claude Code y el bug de NFS en Linux:
+- Cloud Security Alliance, depthfirst y FFmpeg:
+- OpenAI, Aardvark:
+- XBOW en HackerOne:
+- DARPA AIxCC, resultados:
+- Brinqa, Patch Tuesday CVE tracker:
+- VulnCheck, State of Exploitation 1H 2026:
+- Alexopoulos et al., USENIX Security 2022:
+- Daniel Stenberg, el fin del bug bounty de curl:
+- Daniel Stenberg en LinkedIn:
+- Veracode GenAI Code Security Report 2025:
+- Tom's Hardware, Torvalds y el "90% marketing":
 
 ---
 
