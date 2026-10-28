@@ -25,10 +25,15 @@
   --color-text-ghost: #8e8e8e;
   --color-text-faint: #555555;
 
-  /* Gold — the only accent */
+  /* Gold. Still the site-wide accent. Articles use the sunset tokens below. */
   --color-accent: #e6b45c;
   --color-accent-bright: #e6b45c;
   --color-accent-dim: #cc9757;
+
+  /* Sunset accent (La Zuricata DS v3). Solid fallback for thin strokes. */
+  --color-sunset: #f59e0b;
+  --color-sunset-start: #fbbf24;
+  --color-sunset-end: #ea580c;
 
   /* Border */
   --color-border: #2f2f2f;
@@ -315,5 +320,85 @@
 
   .prose-content strong {
     @apply font-semibold text-text-primary;
+  }
+
+  .sunset-rule {
+    height: 6px;
+    width: 75%;
+    max-width: 100%;
+    background-image: linear-gradient(
+      135deg,
+      var(--color-sunset-start),
+      var(--color-sunset-end)
+    );
+  }
+
+  .article-page h1,
+  .article-page h2,
+  .article-page h3 {
+    overflow-wrap: break-word;
+  }
+
+  .article-card {
+    padding: 0;
+    overflow: hidden;
+    background: var(--color-surface-raised);
+  }
+
+  .article-card:hover {
+    border-color: var(--color-sunset);
+  }
+
+  .article-card img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+    width: 100%;
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .article-prose {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    overflow-wrap: break-word;
+  }
+
+  .article-prose p,
+  .article-prose li {
+    line-height: 1.65;
+  }
+
+  .article-prose img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+  }
+
+  .article-prose a {
+    overflow-wrap: anywhere;
+  }
+
+  .article-prose a:hover {
+    color: var(--color-sunset);
+    text-decoration-color: var(--color-sunset);
+  }
+
+  .article-outlink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-height: 2.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--color-sunset);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.35rem;
+  }
+
+  .article-outlink:hover {
+    color: var(--color-sunset);
   }
 }
