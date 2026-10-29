@@ -1,0 +1,42 @@
+---
+import FormattedDate from './FormattedDate.astro';
+import TagList from './TagList.astro';
+
+interface Props {
+  slug: string;
+  title: string;
+  summary: string;
+  cover: string;
+  publishedAt: Date;
+  tags: string[];
+  priority?: boolean;
+}
+
+const { slug, title, summary, cover, publishedAt, tags, priority = false } = Astro.props;
+---
+
+<a href={`/articles/${slug}`} class="article-card card block no-underline">
+  <img
+    src={cover}
+    alt=""
+    loading={priority ? 'eager' : 'lazy'}
+    decoding="async"
+    fetchpriority={priority ? 'high' : undefined}
+  />
+  <div class="min-w-0 p-5">
+    <FormattedDate
+      date={publishedAt}
+      locale="es-AR"
+      timeZone="America/Argentina/Mendoza"
+    />
+    <h2 class="mt-3 text-xl leading-tight md:text-2xl">{title}</h2>
+    <p class="mt-3 text-sm text-text-bajada">{summary}</p>
+    {
+      tags.length > 0 && (
+        <div class="mt-4">
+          <TagList tags={tags} />
+        </div>
+      )
+    }
+  </div>
+</a>

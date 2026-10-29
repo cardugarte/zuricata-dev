@@ -5,11 +5,22 @@ import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
+import { rehypeLazyImages } from './src/lib/rehypeLazyImages.mjs';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://zuricata.dev',
   output: 'static',
+  redirects: {
+    '/blog': {
+      status: 301,
+      destination: '/articles',
+    },
+    '/blog/hello-world': {
+      status: 301,
+      destination: '/articles',
+    },
+  },
   integrations: [
     react(),
     mdx(),
@@ -30,5 +41,6 @@ export default defineConfig({
     shikiConfig: {
       theme: 'vitesse-black',
     },
+    rehypePlugins: [rehypeLazyImages],
   },
 });

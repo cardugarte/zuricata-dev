@@ -8,16 +8,29 @@ interface Props {
   title: string;
   description?: string;
   lang?: string;
+  image?: string;
+  ogType?: 'website' | 'article';
+  publishedTime?: Date;
 }
 
 const {
   title,
   description = 'Privacy, security & AI — by zuricata',
   lang = 'en',
+  image,
+  ogType = 'website',
+  publishedTime,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL('/og.png', Astro.site);
+const ogImage =
+  image == null
+    ? new URL('/og.png', Astro.site).href
+    : image.startsWith('http://') || image.startsWith('https://')
+      ? image
+      : new URL(image, Astro.site).href;
+const twitterCard = image ? 'summary_large_image' : 'summary';
+const ogLocale = lang.toLowerCase().startsWith('es') ? 'es_AR' : 'en_US';
 ---
 
 <!doctype html>
@@ -34,19 +47,24 @@ const ogImage = new URL('/og.png', Astro.site);
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content={ogLocale} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={`${title} | zuricata.dev`} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="zuricata.dev" />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:image:alt" content="zuricata.dev" />
+    <meta property="og:image:alt" content={image ? title : 'zuricata.dev'} />
+    {publishedTime && (
+      <meta property="article:published_time" content={publishedTime.toISOString()} />
+    )}
 
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content={twitterCard} />
     <meta name="twitter:title" content={`${title} | zuricata.dev`} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={image ? title : 'zuricata.dev'} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />

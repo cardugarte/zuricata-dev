@@ -3,7 +3,7 @@ import { Menu, X } from 'lucide-react';
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/blog', label: 'Blog' },
+  { href: '/articles', label: 'Articles' },
   { href: '/projects', label: 'Projects' },
   { href: '/talks', label: 'Talks' },
   { href: '/contact', label: 'Contact' },
@@ -38,7 +38,7 @@ export default function MobileNav() {
 
       <div
         className={`absolute left-0 right-0 top-14 overflow-hidden border-b border-border bg-surface-base transition-all duration-200 ease-out ${
-          open ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0 border-transparent'
+          open ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 border-transparent'
         }`}
       >
         <nav className="mx-auto flex max-w-3xl flex-col px-6 py-3">

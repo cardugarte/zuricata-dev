@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ArticleCard from '@components/ui/ArticleCard.astro';
+import SectionHeader from '@components/ui/SectionHeader.astro';
+import { publishedArticles } from '@lib/articles';
+
+const articles = publishedArticles(await getCollection('articles'));
+const total = String(Math.max(articles.length, 1)).padStart(2, '0');
+---
+
+<BaseLayout
+  title="Articles"
+  description="Textos publicados en X sobre IA, seguridad y herramientas."
+  lang="es"
+>
+  <section class="article-page py-12 md:py-24">
+    <div class="section-container min-w-0">
+      <SectionHeader kicker="articles" counter={`01 / ${total}`} />
+      <h1 class="text-[1.75rem] leading-[1.12] md:text-5xl">Articles</h1>
+      <div class="sunset-rule mb-6"></div>
+      <p class="mb-12 text-text-bajada">Textos publicados en X.</p>
+
+      {
+        articles.length === 0 ? (
+          <p class="font-mono text-sm text-text-label">Todavía no hay artículos.</p>
+        ) : (
+          <div class="grid gap-6">
+            {articles.map((article, index) => (
+              <ArticleCard
+                slug={article.data.slug}
+                title={article.data.title}
+                summary={article.data.summary}
+                cover={article.data.cover}
+                publishedAt={article.data.publishedAt}
+                tags={article.data.tags}
+                priority={index === 0}
+              />
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
