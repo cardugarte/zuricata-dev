@@ -11,6 +11,16 @@ import { rehypeLazyImages } from './src/lib/rehypeLazyImages.mjs';
 export default defineConfig({
   site: 'https://zuricata.dev',
   output: 'static',
+  redirects: {
+    '/blog': {
+      status: 301,
+      destination: '/articles',
+    },
+    '/blog/hello-world': {
+      status: 301,
+      destination: '/articles',
+    },
+  },
   integrations: [
     react(),
     mdx(),
